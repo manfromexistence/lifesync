@@ -86,7 +86,7 @@ textarea{width:100%;height:80px;background:var(--cd);color:var(--tx);border:1px 
 <nav id="nv"></nav>
 <script>
 const $=s=>document.querySelector(s);
-const LS={g(k,d){try{const v=localStorage.getItem('ls_'+k);return v?JSON.parse(v):d}catch(e){return d}},s(k,v){try{localStorage.setItem('ls_'+k,JSON.stringify(v))}catch(e){}}};
+const LS={g(k,d){try{const v=localStorage.getItem('ls_'+k);if(v==null)return d;const p=JSON.parse(v);return p==null?d:p}catch(e){return d}},s(k,v){try{localStorage.setItem('ls_'+k,JSON.stringify(v))}catch(e){}}};
 const iso=x=>x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0');
 const pd=d=>new Date(d+'T00:00:00');
 const addD=(d,n)=>{const x=pd(d);x.setDate(x.getDate()+n);return iso(x)};
@@ -100,15 +100,15 @@ const CODES='N N N W W E2 G N N N W W E2 G N N N W W E2 E2 N N N W W E2 G N N'.s
 const CL={0:[['CSE 403',795,885]],1:[['MGT 401',675,765],['CSE 443',795,885],['CSE 403',885,975]],2:[['MGT 401',885,975],['CSE 449',975,1065]],3:[['CSE 443',585,675],['CSE 449',675,765]],4:[['CSE 450',675,765],['CSE 450',795,885]]};
 const GY=[{n:'Chest + Triceps',ex:[['Bench Press','4×8'],['Incline DB Press','3×10'],['Chest Fly','3×12'],['Dips','3×10'],['Triceps Pushdown','3×12'],['Overhead Triceps Extension','3×12']]},{n:'Back + Biceps',ex:[['Deadlift / Rack Pull','3×5'],['Lat Pulldown','4×10'],['Barbell / Cable Row','3×10'],['Face Pull','3×15'],['Barbell Curl','3×10'],['Hammer Curl','3×12']]},{n:'Legs',ex:[['Squat','4×8'],['Romanian Deadlift','3×10'],['Leg Press','3×12'],['Leg Extension','3×12'],['Leg Curl','3×12'],['Calf Raise','4×15']]},{n:'Shoulders + Abs',ex:[['Overhead Press','4×8'],['Lateral Raise','4×15'],['Rear Delt Fly','3×15'],['Shrugs','3×12'],['Hanging Leg Raise','3×12'],['Plank','3×45s']]}];
 const OSL=['IELTS Reading','Research paper পড়া','IELTS Listening','Book: ML / Data Science','SOP + scholarship খোঁজা','IELTS Writing','Book: textbook পড়া'];
-let CFG=LS.g('cfg',{ow:210,ss:240,se:405});
+let CFG=Object.assign({ow:210,ss:240,se:405,po:0},LS.g('cfg',{})||{});
 const ENGL=['Vocabulary ২০ শব্দ','Speaking — shadowing','Reading + নতুন শব্দ','Writing — journal','Grammar + quiz','Listening (podcast)','Speaking — নিজের সাথে কথা'];
 const csub=d=>[...new Set([...(CL[pd(d).getDay()]||[]),...(CL[pd(addD(d,1)).getDay()]||[])].map(x=>x[0]))];
 const OT=(d,i)=>{const w=pd(d).getDay(),c=csub(d);return['English · '+ENGL[w],OSL[w],'CGPA · '+(c[0]||'ক্লাস')+' revision','Thesis paper পড়া / notes','Book: ML / Data Science','CGPA · '+(c[1]||c[0]||'ক্লাস')+' practice'][i%6]};
 const osB=(d,a,L)=>{const o=[];for(let t=0,i=0;t<L;t+=60,i++)o.push({s:a+t,e:a+Math.min(L,t+60),t:'ostudy',f:i===0,l:'অফিসে পড়া · '+OT(d,i)});return o};
 const Q=[['ভাত ১ কাপ',200,4],['ডিম ১টা',78,6],['মুরগি ১০০g',165,25],['ডাল ১ বাটি',120,8],['মাছ ১০০g',140,20],['কলা ১টা',105,1]];
 document.documentElement.dataset.theme=LS.g('theme','dark');
-let R=LS.g('roster',null);if(!R){R={};CODES.forEach((c,i)=>R['2026-11-'+String(i+1).padStart(2,'0')]=c)}
-let done=LS.g('done',{}),skip=LS.g('skip',{}),tab='t',cur=iso(new Date());
+let R=LS.g('roster',null);if(!R||typeof R!=='object'){R={};CODES.forEach((c,i)=>R['2026-11-'+String(i+1).padStart(2,'0')]=c)}
+let done=LS.g('done',{})||{},skip=LS.g('skip',{})||{},tab='t',cur=iso(new Date());
 if(!R[cur])cur='2026-11-01';
 const TM={run:false,left:3000,end:0,sub:''};
 

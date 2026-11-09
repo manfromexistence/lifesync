@@ -1,5 +1,5 @@
 // LifeSync service worker - cache-first for app shell, network-first for rest
-const CACHE = 'lifesync-v3';
+const CACHE = 'lifesync-v4';
 const CORE = ['./', './index.html', './lifesync.html', './sw.js'];
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(CORE.map((u) => new Request(u, { cache: 'reload' })).then(() => self.skipWaiting()).catch(() => self.skipWaiting()))));
@@ -11,6 +11,17 @@ self.addEventListener('activate', (e) => {
 });
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
+  const isNav = e.request.mode === 'navigate' || (e.request.headers.get('accept') || '').includes('text/html');
+  if (isNav) {
+    e.respondWith(fetch(e.request).then((res) => {
+      if (res && res.status === 200) {
+        const copy = res.clone();
+        caches.open(CACHE).then((c) => c.put(e.request, copy)).catch(() => {});
+      }
+      return res;
+    }).catch(() => caches.match(e.request, { ignoreSearch: true })));
+    return;
+  }
   e.respondWith(
     caches.match(e.request, { ignoreSearch: true }).then((hit) => {
       if (hit) return hit;
