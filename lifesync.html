@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="bn"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LifeSync</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%8F%B3%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#070a12"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#f4f6f8;--cd:#fff;--tx:#161b22;--mu:#667085;--ln:#e3e7ec;--ac:#0f766e;--ac2:#ccfbf1;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1217;--cd:#171d25;--tx:#e8ecf1;--mu:#8b95a3;--ln:#252d38;--ac:#2dd4bf;--ac2:#10343a}}
+:root[data-theme="dark"]{--bg:#0e1217;--cd:#171d25;--tx:#e8ecf1;--mu:#8b95a3;--ln:#252d38;--ac:#2dd4bf;--ac2:#10343a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 "Hind Siliguri",system-ui,sans-serif;padding:0 12px 84px}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px 0 4px}
+h1{font-size:20px;margin:0}h3{margin:14px 0 6px;font-size:16px}
+.mu{color:var(--mu);font-size:13px}
+button,select,input{font:inherit;color:var(--tx)}
+button{background:var(--ac);color:#fff;border:0;border-radius:9px;padding:8px 12px;cursor:pointer}
+button.sm{padding:2px 8px;background:var(--ln);color:var(--tx)}
+button.ol{background:var(--cd);color:var(--tx);border:1px solid var(--ln)}
+input,select{background:var(--cd);border:1px solid var(--ln);border-radius:9px;padding:8px;width:100%}
+input[type=checkbox]{width:20px;height:20px}
+.cd{background:var(--cd);border:1px solid var(--ln);border-radius:12px;padding:12px;margin:8px 0}
+.dn{display:flex;justify-content:space-between;align-items:center;text-align:center;margin:8px 0}
+.ch{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.ch span{background:var(--ac2);border-radius:20px;padding:3px 10px;font-size:13px}
+.r{display:flex;gap:10px;align-items:center;background:var(--cd);border:1px solid var(--ln);border-left:4px solid var(--c,#94a3b8);border-radius:10px;padding:8px 10px;margin:6px 0}
+.r.x{opacity:.5;text-decoration:line-through}
+.tm{min-width:74px;font-weight:600;font-size:13px}.tm small{display:block;color:var(--mu);font-weight:400}
+.lb{flex:1}
+.shift{--c:#6366f1}.commute{--c:#94a3b8}.class{--c:#f59e0b}.travel{--c:#fbbf24}.sleep{--c:#475569}.meal{--c:#22c55e}.gym{--c:#ef4444}.study{--c:#0ea5e9}.care{--c:#ec4899}.plan{--c:#8b5cf6}.free{--c:var(--ln);opacity:.7}
+.g7{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cl{background:var(--cd);border:1px solid var(--ln);border-radius:8px;padding:6px 0;font-size:13px;cursor:pointer}
+.cl.sel{outline:2px solid var(--ac)}.cl b{display:block;font-size:12px}
+.cN{color:#6366f1}.cW,.cH{color:#ef4444}.cE2{color:#f59e0b}.cG{color:#16a34a}.cM{color:#0284c7}.cE1{color:#0d9488}
+.big{font-size:44px;font-weight:700;text-align:center;font-variant-numeric:tabular-nums}
+.bar{height:8px;background:var(--ln);border-radius:6px;overflow:hidden;margin:4px 0 8px}.bar i{display:block;height:100%;background:var(--ac)}
+.row{display:flex;gap:8px;margin:6px 0}.row>*{flex:1}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chips button{background:var(--ac2);color:var(--tx);padding:5px 10px;font-size:13px}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--cd);border-top:1px solid var(--ln);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+nav button{flex:1;background:none;color:var(--mu);border-radius:0;padding:9px 0;font-size:12px}
+nav button.on{color:var(--ac);font-weight:700}
+#toast{position:fixed;left:12px;right:12px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:9;display:flex;flex-direction:column;gap:6px}
+#toast div{background:var(--ac);color:#fff;padding:10px 12px;border-radius:10px}
+:root[data-theme="dark"]{--bg:#070a12;--cd:rgba(255,255,255,.06);--tx:#eef2ff;--mu:#94a3c4;--ln:rgba(255,255,255,.1);--ac:#5eead4;--ac2:rgba(94,234,212,.14);--nv:rgba(14,19,36,.86);--g:linear-gradient(135deg,#2dd4bf,#6366f1 65%,#a855f7)}
+:root[data-theme="light"]{--bg:#f1f4fb;--cd:rgba(255,255,255,.85);--tx:#141a2e;--mu:#5b6682;--ln:rgba(20,26,46,.1);--ac:#0d9488;--ac2:rgba(13,148,136,.12);--nv:rgba(255,255,255,.92);--g:linear-gradient(135deg,#0d9488,#6366f1 65%,#a855f7)}
+body{background:radial-gradient(800px 420px at 0 -5%,rgba(99,102,241,.3),transparent 60%),radial-gradient(600px 420px at 100% 5%,rgba(45,212,191,.18),transparent 55%),var(--bg);background-attachment:fixed;padding-bottom:104px}
+h1{font-size:25px;font-weight:700;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+button{background:var(--g);color:#fff;font-weight:600;box-shadow:0 4px 14px rgba(99,102,241,.3);transition:transform .15s}button:active{transform:scale(.95)}
+button.ol,button.sm{background:var(--cd);color:var(--tx);box-shadow:none;border:1px solid var(--ln)}
+input:focus,select:focus{outline:2px solid var(--ac);border-color:transparent}
+.cd,.r,input,select{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.cd{border-radius:18px;box-shadow:0 8px 28px rgba(0,0,0,.18)}
+.r{border-radius:14px;border-left-width:5px}
+.r.now{box-shadow:0 0 0 1.5px var(--ac),0 0 26px var(--ac2)}
+.nw{background:var(--g);color:#fff;border-radius:20px;padding:0 8px;font-size:11px;font-weight:700}
+.rem{--c:#f43f5e}
+.ch span{border:1px solid var(--ln)}
+.cl{border-radius:12px}
+.hero{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px;border-radius:20px;margin:6px 0 10px;background:linear-gradient(135deg,rgba(45,212,191,.2),rgba(99,102,241,.22) 60%,rgba(168,85,247,.2));border:1px solid var(--ln);box-shadow:0 10px 34px rgba(99,102,241,.2)}
+.hl{font-size:19px;font-weight:700;line-height:1.25;margin:2px 0}
+.ring{flex:none;width:68px;height:68px;border-radius:50%;background:conic-gradient(var(--ac) calc(var(--p)*1%),var(--ln) 0);display:grid;place-items:center}
+.ring b{width:52px;height:52px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-size:14px}
+nav{left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));padding-bottom:0;border-radius:22px;background:var(--nv);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 10px 40px rgba(0,0,0,.35)}
+nav button{font-size:11px;box-shadow:none;background:none;color:var(--mu);border-radius:22px;transition:color .2s}
+nav button.on{color:var(--ac)}
+.eng{--c:#84cc16}.hs{--c:#d946ef}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.cd,.r,.hero{animation:up .4s both}
+.lb::before{margin-right:6px}
+.shift .lb::before{content:'💼'}.commute .lb::before{content:'🚌'}.class .lb::before{content:'🎓'}.travel .lb::before{content:'🚶'}.sleep .lb::before{content:'😴'}.meal .lb::before{content:'🍽️'}.gym .lb::before{content:'🏋️'}.study .lb::before{content:'📚'}.care .lb::before{content:'✨'}.plan .lb::before{content:'📝'}.eng .lb::before{content:'🗣️'}.hs .lb::before{content:'🌍'}.rem .lb::before{content:'🔔'}.free .lb::before{content:'☕'}
+.mo .lb::before{content:none!important}
+.ostudy{--c:#14b8a6}.thesis{--c:#22d3ee}.ostudy .lb::before{content:'🏢'}.thesis .lb::before{content:'🧪'}
+.salah{--c:#10b981}.salah .lb::before{content:'🕌'}.r.ov{border-style:dashed;opacity:.9}
+.wk{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none}
+.wk div{flex:1;min-width:46px;text-align:center;background:var(--cd);border:1px solid var(--ln);border-radius:14px;padding:6px 0;font-size:12px;cursor:pointer;backdrop-filter:blur(10px)}
+.wk div b{display:block;font-size:16px}.wk div.sel{background:var(--g);color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(99,102,241,.35)}.wk div.sel span{color:#fff}
+.cl.td{border-color:var(--ac)}
+.bars{display:flex;gap:6px;align-items:flex-end;margin-top:8px}.bars div{flex:1;text-align:center;font-size:11px;color:var(--mu)}.bars i{display:block;background:var(--g);border-radius:6px 6px 2px 2px;min-height:3px;margin-bottom:3px}
+textarea{width:100%;height:80px;background:var(--cd);color:var(--tx);border:1px solid var(--ln);border-radius:12px;padding:8px;font:12px monospace;margin:6px 0}
+</style></head><body>
+<div id="toast"></div>
+<header><div><h1>LifeSync</h1><div class="mu" id="gr"></div></div><div class="row" style="flex:none"><button class="ol" id="th" onclick="theme()"></button><button class="ol" id="bell" onclick="alerts()"></button></div></header>
+<main id="v"></main>
+<nav id="nv"></nav>
+<script>
+const $=s=>document.querySelector(s);
+const LS={g(k,d){try{const v=localStorage.getItem('ls_'+k);return v?JSON.parse(v):d}catch(e){return d}},s(k,v){try{localStorage.setItem('ls_'+k,JSON.stringify(v))}catch(e){}}};
+const iso=x=>x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0');
+const pd=d=>new Date(d+'T00:00:00');
+const addD=(d,n)=>{const x=pd(d);x.setDate(x.getDate()+n);return iso(x)};
+const T=n=>{n=((n%1440)+1440)%1440;const h=Math.floor(n/60);return (h%12||12)+':'+String(n%60).padStart(2,'0')+(h>=12?' PM':' AM')};
+const D=m=>m>=60?Math.floor(m/60)+'h'+(m%60?' '+m%60+'m':''):m+'m';
+const WD=['রবি','সোম','মঙ্গল','বুধ','বৃহঃ','শুক্র','শনি'];
+const dl=d=>{const x=pd(d);return WD[x.getDay()]+', '+x.getDate()+'/'+(x.getMonth()+1)+'/'+x.getFullYear()};
+const SH={M:[450,960],G:[540,1080],E1:[690,1200],E2:[900,1380],N:[1320,1890]};
+const OFF=['W','H','ExL'],CK=['class','meal','gym','study','care','plan','eng','hs','ostudy','thesis','salah'];
+const CODES='N N N W W E2 G N N N W W E2 G N N N W W E2 E2 N N N W W E2 G N N'.split(' ');
+const CL={0:[['CSE 403',795,885]],1:[['MGT 401',675,765],['CSE 443',795,885],['CSE 403',885,975]],2:[['MGT 401',885,975],['CSE 449',975,1065]],3:[['CSE 443',585,675],['CSE 449',675,765]],4:[['CSE 450',675,765],['CSE 450',795,885]]};
+const GY=[{n:'Chest + Triceps',ex:[['Bench Press','4×8'],['Incline DB Press','3×10'],['Chest Fly','3×12'],['Dips','3×10'],['Triceps Pushdown','3×12'],['Overhead Triceps Extension','3×12']]},{n:'Back + Biceps',ex:[['Deadlift / Rack Pull','3×5'],['Lat Pulldown','4×10'],['Barbell / Cable Row','3×10'],['Face Pull','3×15'],['Barbell Curl','3×10'],['Hammer Curl','3×12']]},{n:'Legs',ex:[['Squat','4×8'],['Romanian Deadlift','3×10'],['Leg Press','3×12'],['Leg Extension','3×12'],['Leg Curl','3×12'],['Calf Raise','4×15']]},{n:'Shoulders + Abs',ex:[['Overhead Press','4×8'],['Lateral Raise','4×15'],['Rear Delt Fly','3×15'],['Shrugs','3×12'],['Hanging Leg Raise','3×12'],['Plank','3×45s']]}];
+const OSL=['IELTS Reading','Research paper পড়া','IELTS Listening','Book: ML / Data Science','SOP + scholarship খোঁজা','IELTS Writing','Book: textbook পড়া'];
+let CFG=LS.g('cfg',{ow:210,ss:240,se:405});
+const ENGL=['Vocabulary ২০ শব্দ','Speaking — shadowing','Reading + নতুন শব্দ','Writing — journal','Grammar + quiz','Listening (podcast)','Speaking — নিজের সাথে কথা'];
+const csub=d=>[...new Set([...(CL[pd(d).getDay()]||[]),...(CL[pd(addD(d,1)).getDay()]||[])].map(x=>x[0]))];
+const OT=(d,i)=>{const w=pd(d).getDay(),c=csub(d);return['English · '+ENGL[w],OSL[w],'CGPA · '+(c[0]||'ক্লাস')+' revision','Thesis paper পড়া / notes','Book: ML / Data Science','CGPA · '+(c[1]||c[0]||'ক্লাস')+' practice'][i%6]};
+const osB=(d,a,L)=>{const o=[];for(let t=0,i=0;t<L;t+=60,i++)o.push({s:a+t,e:a+Math.min(L,t+60),t:'ostudy',f:i===0,l:'অফিসে পড়া · '+OT(d,i)});return o};
+const Q=[['ভাত ১ কাপ',200,4],['ডিম ১টা',78,6],['মুরগি ১০০g',165,25],['ডাল ১ বাটি',120,8],['মাছ ১০০g',140,20],['কলা ১টা',105,1]];
+document.documentElement.dataset.theme=LS.g('theme','dark');
+let R=LS.g('roster',null);if(!R){R={};CODES.forEach((c,i)=>R['2026-11-'+String(i+1).padStart(2,'0')]=c)}
+let done=LS.g('done',{}),skip=LS.g('skip',{}),tab='t',cur=iso(new Date());
+if(!R[cur])cur='2026-11-01';
+const TM={run:false,left:3000,end:0,sub:''};
+
+function core(d){
+ const c=R[d]||'',p=R[addD(d,-1)]||'',B=[];
+ if(p==='N')B.push(...(()=>{const ss=Math.min(CFG.ss,420),se=Math.min(Math.max(CFG.se,ss+30),435),L=Math.min(CFG.ow,ss),a=ss-L;return[...(a>0?[{s:0,e:a,t:'shift',l:'Night shift চলছে'}]:[]),...osB(d,a,L),{s:ss,e:se,t:'sleep',l:'অফিসে ঘুম (ডিউটি)'},{s:se,e:450,t:'shift',l:'Night shift শেষ (7:30 AM)'}]})(),{s:450,e:495,t:'commute',l:'বাসায় ফেরা (45m)'});
+ if(SH[c]){const[s,e]=SH[c];B.push({s:s-45,e:s,t:'commute',l:'অফিসে যাওয়া (45m)'},...(c==='N'?[{s,e:1440,t:'shift',l:c+' shift · '+T(s)+'–'+T(e)}]:[{s,e:s+90,t:'shift',l:c+' shift · '+T(s)+'–'+T(e)},...osB(d,s+90,CFG.ow),{s:s+90+CFG.ow,e,t:'shift',l:'শিফট চলছে'}]));if(e<1440)B.push({s:e,e:Math.min(e+45,1440),t:'commute',l:'বাসায় ফেরা (45m)'})}
+ const bz=B.slice();let pe=-99;
+ (CL[pd(d).getDay()]||[]).forEach(([n,s,e])=>{
+  const id=d+'|'+n+s;
+  if(bz.some(b=>b.s<e&&s-10<b.e)){B.push({s,e,t:'class',l:n+' ক্লাস — shift এর সাথে clash',x:1,id});return}
+  if(skip[id]){B.push({s,e,t:'class',l:n+' (বাদ দেওয়া)',x:2,id});return}
+  if(pe<s-10)B.push({s:s-10,e:s,t:'travel',l:n+' ক্লাসে যাওয়া (10m আগে)'});
+  B.push({s,e,t:'class',l:n+' ক্লাস',id});pe=e});
+ return B}
+function wake(d){
+ if((R[addD(d,-1)]||'')==='N')return null;
+ const f=Math.min(1440,...core(d).filter(b=>!b.x).map(b=>b.s));
+ return Math.max(330,Math.min(480,f-45))}
+function bed(d){
+ if((R[d]||'')==='N')return null;
+ const w=wake(addD(d,1));return w==null?null:1440-Math.max(0,480-w)}
+function trg(){const p=LS.g('prof',{w:65,h:170,a:22,g:0});const k=Math.round((10*p.w+6.25*p.h-5*p.a+5)*1.45+(+p.g));return{k,p:Math.round(p.w*1.8),f:Math.round(k*.25/9)}}
+function subs(d){const f=x=>core(x).filter(b=>b.t==='class'&&!b.x).map(b=>b.l.replace(' ক্লাস','')),u=[...new Set(f(d).concat(f(addD(d,1))))];if(u.length<2)u.push('Thesis (Bangla OCR)','Coding practice');return u}
+const isG=k=>{const c=R[k]||'',p=R[addD(k,-1)]||'';return OFF.includes(c)||(c==='E2'&&OFF.includes(p))||(c==='N'&&p!=='N')};
+function gi(d){return Object.keys(R).filter(k=>k<d&&isG(k)).length%4}
+function plan(d){
+ const c=R[d]||'',pN=(R[addD(d,-1)]||'')==='N',B=core(d),F=B.filter(b=>!b.x),w=wake(d),bd=bed(d),rg=[];
+ if(pN)rg.push([525,840]);else rg.push([0,w]);
+ if(c==='N')rg.push([900,1050]);
+ if(bd!=null)rg.push([bd,1440]);
+ const OV=[],PT=pt(d),SA=[['ফজর',PT.f,20,PT.s-10],pd(d).getDay()===5?['জুমা',PT.d+75,60,PT.a-20]:['যোহর',PT.d,15,PT.a-10],['আসর',PT.a,15,PT.m-10],['মাগরিব',PT.m,15,PT.i-10],['ইশা',PT.i,20,1410]];
+ SA.forEach(([n,t0,len,we])=>{let s=t0,ok=0;for(;s<=we-len;s+=5)if(!F.some(b=>b.s<s+len&&s<b.e)){ok=1;break}
+  if(ok)F.push({s,e:s+len,t:'salah',l:n+' নামাজ'+(s>t0+15?' (দেরিতে)':'')});else OV.push({s:t0,e:t0+len,t:'salah',ov:1,l:n+' নামাজ (ডিউটি/ক্লাসের সময়ে)'})});
+ const S=[],Fs=[...F].sort((a,b)=>a.s-b.s);
+ rg.forEach(([a,b])=>{let t=a;Fs.forEach(f=>{if(f.e<=t||f.s>=b)return;if(f.s-t>=45)S.push({s:t,e:f.s});t=Math.max(t,f.e)});if(b-t>=45)S.push({s:t,e:b})});
+ const all=F.concat(S.map(x=>({...x,t:'sleep',l:'ঘুম'})));
+ const free=(s,e)=>!all.some(b=>b.s<e&&s<b.e);
+ const put=(len,tg,t,l)=>{for(let k=0;k<=160;k+=15)for(const sg of[1,-1]){const s=tg+sg*k;if(s>=300&&s+len<=1440&&free(s,s+len)){const b={s,e:s+len,t,l};all.push(b);return b}}};
+ const ws=(S.filter(x=>x.s<1000)[0]||{e:w||480}).e,tr=trg();
+ put(30,ws,'care','উঠে ফ্রেশ + মর্নিং স্কিনকেয়ার (cleanser → moisturizer → sunscreen)');
+ let lm=null;
+ [[pN?'Brunch':'Breakfast',ws+40,.3],['Lunch',810,.35],['Dinner',1230,.35]].forEach(([n,tg,f])=>{
+  const b=put(30,tg,'meal',n+' · ~'+Math.round(tr.k*f)+' kcal · protein '+Math.round(tr.p*f)+'g');
+  if(b){if(lm!=null&&b.s-lm<150)all.pop();else lm=b.s}});
+ if(isG(d))put(90,1020,'gym','Gym — '+GY[gi(d)].n)||put(90,600,'gym','Gym — '+GY[gi(d)].n)||put(90,1200,'gym','Gym — '+GY[gi(d)].n);
+ if(bd!=null)put(30,bd-45,'plan','রাতের স্কিনকেয়ার + কালকের to-do plan');
+ const sb=subs(d);let si=0;
+ const gaps=()=>{const a=[...all].sort((x,y)=>x.s-y.s),o=[];let t=360;a.forEach(b=>{if(b.s>t)o.push([t,b.s]);t=Math.max(t,b.e)});if(t<1440)o.push([t,1440]);return o};
+ const fit=(len,t,l)=>{for(const[a,b]of gaps())if(b-a>=len&&a<1320){const x={s:a,e:a+len,t,l};all.push(x);return x}},pf=(len,tg,t,l)=>put(len,tg,t,l)||fit(len,t,l),wd=pd(d).getDay(),
+ ENG=['Vocabulary ২০ শব্দ + Listening','Speaking — shadowing','Reading + নতুন শব্দ','Writing — ১ paragraph journal','Grammar + mini quiz','Podcast / YouTube listening','Speaking — নিজের সাথে কথা'],
+ HS=['IELTS Reading','Research paper পড়া (ML/DS)','IELTS Listening','GitHub project / portfolio','SOP + scholarship/uni খোঁজা','IELTS Writing','IELTS Speaking + mock'];
+ pf(10,ws+30,'care','Jawline exercise (chin tucks, neck curls)');
+ if([0,3,6].includes(wd))pf(20,1290,'care','হেয়ার ওয়াশ + কন্ডিশনার');else pf(10,1290,'care','স্ক্যাল্প massage + হেয়ার কেয়ার');
+ pf(60,600,'study',(csub(d).length?'CGPA':'Study')+' · '+sb[0]+' (আজকের lecture revision)');
+ pf(60,960,'study',(csub(d).length?'CGPA':'Study')+' · '+sb[1%sb.length]+' (practice + notes)');
+ const oo=F.some(b=>b.t==='ostudy'),TH=['Testing — dataset + test accuracy','Paper — Introduction / Related work','Testing — error analysis (confusion matrix)','Paper — Methodology','Testing — augmentation / tuning experiment','Paper — Results + figures','Paper — review + references'];
+ pf(OFF.includes(c)?90:60,720,'thesis','Thesis (Bangla OCR) · '+TH[wd]);pf(20,1080,'care','হেলথ কেয়ার: stretching + চোখের বিশ্রাম + হালকা হাঁটা');if(!oo)pf(30,560,'eng','English · '+ENG[wd]);
+ if(!oo)pf(60,1140,'hs','উচ্চশিক্ষা · '+HS[wd]);
+ gaps().forEach(([a,b])=>{while(b-a>=45){const len=Math.min(90,b-a);all.push({s:a,e:a+len,t:'study',l:'Study · '+sb[si++%sb.length]});a+=len+10}});
+ gaps().forEach(([a,b])=>{if(b-a>=30)all.push({s:a,e:b,t:'free',l:'ফ্রি / বিশ্রাম'})});
+ all.push(...OV);all.forEach(b=>{b.id=b.id||d+'|'+b.t+b.s});
+ return all.sort((a,b)=>a.s-b.s)}
+
+function row(b){
+ const ck=CK.includes(b.t)&&!b.x,cl=b.t==='class'&&b.x!==1;
+ return `<div class="r ${b.t}${b.x?' x':''}${nw(b)?' now':''}${b.ov?' ov':''}"><div class="tm">${T(b.s)}<small>${b.t==='rem'?'🔔':D(b.e-b.s)}</small></div><div class="lb">${nw(b)?'<span class="nw">এখন</span> ':''}${b.l}</div>${ck?`<input type="checkbox" data-id="${b.id}" ${done[b.id]?'checked':''} onchange="tg(this.dataset.id)">`:''}${cl?`<button class="sm" data-id="${b.id}" onclick="sk(this.dataset.id)">${b.x===2?'↩':'✕'}</button>`:''}</div>`}
+function vToday(){
+ const c=R[cur]||'—',P=plan(cur).concat(remB(cur)).sort((a,b)=>a.s-b.s),
+ st=P.filter(b=>b.t==='study'||b.t==='ostudy').reduce((a,b)=>a+b.e-b.s,0),
+ sl=P.filter(b=>b.t==='sleep'&&b.s<1000).reduce((a,b)=>a+b.e-b.s,0),
+ ck=P.filter(b=>CK.includes(b.t)&&!b.x),dn=ck.filter(b=>done[b.id]).length,fm=LS.g('focus',{})[cur]||0;
+ return hero(P,dn,ck.length)+strip()+`<div class="dn"><button class="ol" onclick="mv(-1)">‹</button><div><b>${dl(cur)}</b><br><span class="mu">রোস্টার: ${c}${R[cur]?'':' (Month ট্যাবে সেট করো)'}</span></div><button class="ol" onclick="mv(1)">›</button></div>
+ <div class="ch"><span>📚 ${D(st)} plan</span><span>😴 ${D(sl)}${sl<360?' ⚠ কম':''}</span><span>✅ ${dn}/${ck.length}</span><span>⏱ ${fm}m focus</span><span>🔥 ${streak()} দিন</span></div>${dbar(P)}${prow()}`+P.map(row).join('')+`<p class="mu">ক্লাসের পাশে ✕ চাপলে সেই ক্লাস বাদ দিয়ে টাইমলাইন নতুন করে সাজবে।</p>`}
+function vMonth(){
+ const x=pd(cur),y=x.getFullYear(),m=x.getMonth(),off=new Date(y,m,1).getDay(),n=new Date(y,m+1,0).getDate();
+ let h=`<div class="dn"><button class="ol" onclick="mm(-1)">‹</button><b>${y}-${String(m+1).padStart(2,'0')}</b><button class="ol" onclick="mm(1)">›</button></div><div class="g7">`+WD.map(w=>`<span class="mu">${w}</span>`).join('');
+ for(let i=0;i<off;i++)h+='<span></span>';
+ for(let d=1;d<=n;d++){const k=iso(new Date(y,m,d)),c=R[k]||'';h+=`<div class="cl${k===cur?' sel':''}${k===iso(new Date())?' td':''}" data-k="${k}" onclick="cur=this.dataset.k;render()">${d}<b class="c${c}">${c||'·'}</b></div>`}
+ return h+`</div>${mstat(y,m,n)}<div class="cd"><b>${dl(cur)}</b><div class="row"><select onchange="setC(this.value)">${['','M','G','E1','E2','N','W','H'].map(c=>`<option value="${c}"${c===(R[cur]||'')?' selected':''}>${c||'— কোড নেই —'}</option>`).join('')}</select><button onclick="go('t')">Timeline দেখো</button></div><p class="mu">W/H = off day (gym বাধ্যতামূলক)। M 7:30–4 · G 9–6 · E1 11:30–8 · E2 3–11 PM · N 10 PM–7:30 AM</p></div>`}
+function vGym(){
+ const off=isG(cur),g=GY[gi(cur)],L=x=>x.ex.map(e=>`<div class="r"><div class="lb">${e[0]}</div><b>${e[1]}</b></div>`).join('');
+ return `<h3>${off?'আজকের Gym: '+g.n:'আজ gym rest day'}</h3>`+(off?`<div class="cd mu">Warm-up ৮ মিনিট (হালকা cardio + mobility)। প্রতি exercise এ শেষ set failure এর ১–২ rep আগে থামো। সেশনের পর ৫ মিনিট stretch।</div>`+L(g):'')+`<h3>সপ্তাহে ৪ দিন · ৪ রকম gym</h3><div class="mu">Chest+Triceps → Back+Biceps → Legs → Shoulders+Abs। gym দিন: রাত-শিফটের প্রথম দিন, দুই off day (W), আর W এর পরের E2 দিন। প্রতিটা muscle সপ্তাহে একবার ভালো করে হয়।</div>${GY.map(x=>`<h3>${x.n}</h3>${L(x)}`).join('')}<p class="mu">Progressive overload: সব set পারলে পরের সেশনে ২.৫ কেজি বাড়াও।</p>${wlog()}<h3>Skin · Hair · Jawline</h3><div class="cd mu">সকাল: face wash → moisturizer → sunscreen। রাত: face wash → moisturizer। হেয়ার ওয়াশ সপ্তাহে ৩ দিন (রবি, বুধ, শনি), বাকি দিন ১০ মিনিট scalp massage। Jawline: প্রতিদিন ১০ মিনিট (chin tucks, neck curls)।</div>`}
+function vFood(){
+ const p=LS.g('prof',{w:65,h:170,a:22,g:0}),t=trg(),L=LS.g('food',[]).map((x,i)=>[x,i]).filter(([x])=>x.d===cur),k=L.reduce((a,[x])=>a+x.k,0),pr=L.reduce((a,[x])=>a+x.p,0),pc=Math.min(100,k/t.k*100);
+ return `<div class="cd"><b>আজকের target: ${t.k} kcal · protein ${t.p}g · fat ~${t.f}g</b><div class="bar"><i style="width:${pc}%"></i></div><span class="mu">খেয়েছ: ${k} kcal · protein ${pr}g · বাকি ${Math.max(0,t.k-k)} kcal</span></div>
+ <div class="cd"><b>📷 Food scanner</b><div class="row"><button onclick="$('#fi').click()">ছবি তোলো / বাছো</button></div><input type="file" id="fi" accept="image/*" capture="environment" hidden onchange="scan(this.files[0])"><div id="sr" class="mu">খাবারের ছবি দিলে Claude kcal ও protein অনুমান করবে (আনুমানিক)।</div>
+ <div class="row"><input id="fn" placeholder="খাবারের নাম"></div><div class="row"><input id="fk" type="number" placeholder="kcal"><input id="fp" type="number" placeholder="protein g"><button onclick="addFm()">যোগ</button></div>
+ <div class="chips">${Q.map((q,i)=>`<button onclick="addF(...Q[${i}])">${q[0]}</button>`).join('')}</div></div>`
+ +L.map(([x,i])=>`<div class="r meal"><div class="lb">${x.n}<br><span class="mu">${x.k} kcal · ${x.p}g protein</span></div><button class="sm" onclick="dF(${i})">✕</button></div>`).join('')
+ +`${water()}<div class="cd"><b>তোমার মাপ (target হিসাবের জন্য)</b><div class="row"><input id="pw" type="number" value="${p.w}"><input id="ph" type="number" value="${p.h}"><input id="pa" type="number" value="${p.a}"></div><div class="mu">ওজন kg · উচ্চতা cm · বয়স</div><div class="row"><select id="pg"><option value="-400"${p.g==-400?' selected':''}>ওজন কমানো</option><option value="0"${p.g==0?' selected':''}>একই রাখা</option><option value="300"${p.g==300?' selected':''}>ওজন/muscle বাড়ানো</option></select><button onclick="svp()">Save</button></div></div>`}
+function mmss(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function vStudy(){
+ const P=plan(cur).filter(b=>b.t==='study'),fm=LS.g('focus',{})[cur]||0;
+ return `<div class="cd"><div class="big" id="tmr">${mmss(TM.left)}</div><div class="row"><select id="fs">${subs(cur).concat(['Thesis (Bangla OCR)','Coding practice']).filter((v,i,a)=>a.indexOf(v)===i).map(x=>`<option${x===TM.sub?' selected':''}>${x}</option>`).join('')}</select><button onclick="tS()">${TM.run?'⏹ Stop':'▶ Focus 50m'}</button></div><div class="mu">আজ মোট focus: ${fm} মিনিট · ফোন দূরে রাখো, শেষে ১০ মিনিট বিরতি</div></div>${fbars()}<h3>আজকের study slot</h3>`+(P.map(row).join('')||'<div class="mu">আজ খালি slot নেই।</div>')}
+function vMoney(){
+ const M=LS.g('money',[]),mo=cur.slice(0,7),X=M.map((x,i)=>[x,i]).filter(([x])=>x.d.slice(0,7)===mo),inc=X.filter(([x])=>x.k==='i').reduce((a,[x])=>a+x.a,0),ex=X.filter(([x])=>x.k==='e').reduce((a,[x])=>a+x.a,0);
+ return `<div class="cd"><b>এই মাস: আয় ৳${inc} · খরচ ৳${ex} · বাকি ৳${inc-ex}</b></div><div class="cd"><div class="row"><input id="ma" type="number" placeholder="টাকা"><select id="mk"><option value="e">খরচ</option><option value="i">আয়</option></select></div><div class="row"><input id="mn" placeholder="কীসের জন্য"><button onclick="addM()">যোগ</button></div></div>`+X.slice().reverse().map(([x,i])=>`<div class="r mo ${x.k==='e'?'gym':'meal'}"><div class="tm">${x.d.slice(5)}</div><div class="lb">${x.n||'—'}</div><b>${x.k==='e'?'-':'+'}৳${x.a}</b><button class="sm" onclick="dM(${i})">✕</button></div>`).join('')}
+function render(){
+ $('#v').innerHTML={t:vToday,m:vMonth,g:vGym,f:vFood,s:vStudy,r:vRem,$:vMoney}[tab]();
+ $('#nv').innerHTML=[['t','📅','আজ'],['m','🗓️','মাস'],['g','🏋️','Gym'],['f','🍽️','Food'],['s','📚','Study'],['r','⏰','Remind'],['$','💰','টাকা']].map(([k,i,n])=>`<button class="${tab===k?'on':''}" onclick="go('${k}')">${i}<br>${n}</button>`).join('');
+ $('#bell').textContent=LS.g('alerts',false)?'🔔':'🔕';$('#th').textContent=document.documentElement.dataset.theme==='dark'?'🌙':'☀️';$('#gr').textContent='শুভ '+(h=>h<5?'রাত':h<12?'সকাল':h<17?'বিকেল':'সন্ধ্যা')(new Date().getHours())+', Mahabub 👋'}
+function go(k){tab=k;render();scrollTo(0,0)}
+function mv(n){cur=addD(cur,n);render()}
+function mm(n){const x=pd(cur);cur=iso(new Date(x.getFullYear(),x.getMonth()+n,1));render()}
+function setC(v){if(v)R[cur]=v;else delete R[cur];LS.s('roster',R);render()}
+function tg(id){done[id]=!done[id];LS.s('done',done);render();if(done[id]&&pct(cur)>=1)toast('🎉 আজকের সব কাজ শেষ — দারুণ কাজ!')}
+function sk(id){skip[id]=!skip[id];LS.s('skip',skip);render()}
+function addF(n,k,p){const L=LS.g('food',[]);L.push({d:cur,n,k:+k,p:+p});LS.s('food',L);render()}
+function addFm(){const n=$('#fn').value.trim(),k=$('#fk').value;if(n&&k)addF(n,k,$('#fp').value||0)}
+function dF(i){const L=LS.g('food',[]);L.splice(i,1);LS.s('food',L);render()}
+function svp(){LS.s('prof',{w:+$('#pw').value,h:+$('#ph').value,a:+$('#pa').value,g:+$('#pg').value});render()}
+function addM(){const a=+$('#ma').value;if(!a)return;const M=LS.g('money',[]);M.push({d:cur,a,n:$('#mn').value.trim(),k:$('#mk').value});LS.s('money',M);render()}
+function dM(i){const M=LS.g('money',[]);M.splice(i,1);LS.s('money',M);render()}
+async function scan(f){
+ if(!f)return;const o=$('#sr');o.textContent='স্ক্যান হচ্ছে…';
+ try{if(typeof claude==='undefined')throw new Error('unavailable');const sm=await claude.use('sample');if(!sm)throw 0;
+  const r=await sm('Identify the food in this photo and estimate nutrition for the visible portion. Reply ONLY with JSON: {"name":"","portion":"","kcal":0,"protein":0}',{images:[f],modelTier:'quick',cache:false});
+  const j=JSON.parse(r.text.replace(/```json|```/g,'').trim());
+  $('#fn').value=j.name+(j.portion?' ('+j.portion+')':'');$('#fk').value=Math.round(j.kcal);$('#fp').value=Math.round(j.protein);o.textContent='অনুমান: ঠিক থাকলে “যোগ” চাপো (আনুমানিক মান)।'
+ }catch(e){o.textContent='স্ক্যান করা যায়নি — নিচে হাতে লিখে বা chip দিয়ে যোগ করো।'}}
+function toast(m,t=6000){const e=document.createElement('div');e.textContent=m;e.onclick=()=>e.remove();$('#toast').appendChild(e);setTimeout(()=>e.remove(),t)}
+function alertUser(m){
+ toast(m,25000);
+ try{navigator.vibrate&&navigator.vibrate([200,100,200])}catch(e){}
+ try{const a=AC||(AC=new(window.AudioContext||window.webkitAudioContext)());a.resume();[0,.3,.6].forEach(t=>{const o=a.createOscillator(),g=a.createGain();o.connect(g);g.connect(a.destination);o.frequency.value=880;g.gain.value=.15;o.start(a.currentTime+t);o.stop(a.currentTime+t+.2)})}catch(e){}
+ try{if('Notification' in window&&Notification.permission==='granted'){const o={body:m,tag:'ls'+Date.now(),vibrate:[200,100,200]};if(SW)SW.showNotification('LifeSync',o);else new Notification('LifeSync',o)}}catch(e){}}
+async function alerts(){
+ const on=!LS.g('alerts',false);LS.s('alerts',on);
+ if(on){try{if('Notification' in window)await Notification.requestPermission()}catch(e){}alertUser('অ্যালার্ট চালু ✓ — পেজ খোলা থাকলে ৫ মিনিট আগে জানাবে')}
+ render()}
+let fired=LS.g('fired',{}),AC,SW;const fire=k=>{fired[k]=1;if(Object.keys(fired).length>500)fired={};LS.s('fired',fired)};
+function tick(){
+ if(!LS.g('alerts',false))return;
+ const n=new Date(),d=iso(n),m=n.getHours()*60+n.getMinutes();
+ LS.g('rem',[]).forEach(r=>{if(r.d!=='*'&&r.d!==d)return;const k='r'+r.id+d,f=r.s-r.l;if(!fired[k]&&m>=f&&m<=r.s+10){fire(k);alertUser('⏰ '+r.n+' — '+T(r.s)+(r.l?' ('+r.l+' মিনিট পর)':' এখনই'))}});
+ plan(d).forEach(b=>{if(b.x||b.t==='free'||b.t==='shift'||(b.t==='ostudy'&&!b.f)||fired[b.id])return;const dt=b.s-m;if(dt>=-10&&dt<=5){fire(b.id);alertUser(b.l+' — '+T(b.s)+' এ ('+Math.max(0,dt)+' মিনিট পর)')}})}
+function tS(){
+ if(TM.run){const el=Math.floor((3000-TM.left)/60);if(el>0)logF(el);TM.run=false;TM.left=3000}
+ else{TM.sub=$('#fs').value;TM.end=Date.now()+TM.left*1000;TM.run=true}
+ render()}
+function logF(m){const F=LS.g('focus',{}),k=iso(new Date());F[k]=(F[k]||0)+m;LS.s('focus',F)}
+function tt(){
+ if(!TM.run)return;
+ TM.left=Math.max(0,Math.round((TM.end-Date.now())/1000));
+ const e=$('#tmr');if(e)e.textContent=mmss(TM.left);
+ if(TM.left===0){TM.run=false;TM.left=3000;logF(50);alertUser('Focus সেশন শেষ! ১০ মিনিট বিরতি নাও');render()}}
+const nw=b=>{const n=new Date(),m=n.getHours()*60+n.getMinutes();return cur===iso(n)&&!b.x&&b.t!=='free'&&b.t!=='rem'&&b.s<=m&&m<b.e};
+function remB(d){return LS.g('rem',[]).filter(r=>r.d===d||r.d==='*').map(r=>({s:r.s,e:r.s+1,t:'rem',l:r.n,id:'r'+r.id+d}))}
+function hero(P,dn,tot){
+ const isT=cur===iso(new Date()),n=new Date(),m=n.getHours()*60+n.getMinutes(),p=tot?Math.round(dn/tot*100):0,
+ nx=P.find(b=>b.s>m&&b.t!=='free'&&!b.x),c=P.find(b=>b.s<=m&&m<b.e&&b.t!=='free'&&b.t!=='rem'&&!b.x);
+ return `<div class="hero"><div><div class="mu">${isT?'এখন · '+T(m):'নির্বাচিত দিন'}</div><div class="hl">${isT&&c?c.l:'—'}</div><div class="mu">${isT&&nx?'পরের: '+nx.l+' · '+D(nx.s-m)+' পরে':'পুরো plan নিচে'}</div></div><div class="ring" style="--p:${p}"><b>${p}%</b></div></div>`}
+function pct(d){const c=plan(d).filter(b=>CK.includes(b.t)&&!b.x);return c.length?c.filter(b=>done[b.id]).length/c.length:0}
+function streak(){let n=0,d=iso(new Date());if(!R[d]||pct(d)<.6)d=addD(d,-1);while(n<60&&R[d]&&pct(d)>=.6){n++;d=addD(d,-1)}return n}
+function water(){const W=LS.g('water',{}),g=Math.round(LS.g('prof',{w:65}).w*35),v=W[cur]||0;return `<div class="cd"><b>💧 পানি: ${v} / ${g} ml</b><div class="bar"><i style="width:${Math.min(100,v/g*100)}%"></i></div><div class="row"><button onclick="addW(250)">+ ২৫০ ml</button><button class="ol" onclick="addW(-250)">−</button></div></div>`}
+function addW(n){const W=LS.g('water',{});W[cur]=Math.max(0,(W[cur]||0)+n);LS.s('water',W);render()}
+function vRem(){
+ const L=LS.g('rem',[]).slice().sort((a,b)=>a.s-b.s),on=LS.g('alerts',false);
+ return `<div class="cd"><b>⏰ নতুন reminder — এই সময়, এই কাজ</b><div class="row"><input id="rn" placeholder="কাজ: যেমন Data Mining পড়া"></div><div class="row"><input id="rt" type="time"><select id="rl"><option value="0">ঠিক সময়ে</option><option value="5">৫ মিনিট আগে</option><option value="10">১০ মিনিট আগে</option><option value="30">৩০ মিনিট আগে</option></select></div><div class="row"><select id="rr"><option value="${cur}">শুধু ${dl(cur)}</option><option value="*">প্রতিদিন</option></select><button onclick="addR()">যোগ</button></div>${on?'':'<div class="mu">⚠ উপরে 🔕 চেপে অ্যালার্ট চালু করো, নইলে reminder বাজবে না।</div>'}</div>`
+ +L.map(r=>`<div class="r rem"><div class="tm">${T(r.s)}<small>${r.d==='*'?'প্রতিদিন':r.d.slice(5)}</small></div><div class="lb">${r.n}${r.l?'<br><span class="mu">'+r.l+' মিনিট আগে জানাবে</span>':''}</div><button class="sm" data-id="${r.id}" onclick="dR(this.dataset.id)">✕</button></div>`).join('')
+ +`<div class="row"><button class="ol" onclick="alertUser('⏰ টেস্ট alert')">Test alert</button></div><p class="mu">reminder Today টাইমলাইনেও 🔔 হয়ে দেখা যাবে। alert বাজবে পেজ খোলা থাকলে।</p>${hlth()}${setg()}<div class="cd"><b>💾 Backup / Restore</b><textarea id="bk" placeholder="Export চাপলে data এখানে আসবে; Restore এর জন্য paste করো"></textarea><div class="row"><button onclick="bkx()">Export</button><button class="ol" onclick="bki()">Import</button></div></div>`}
+function addR(){const n=$('#rn').value.trim(),t=$('#rt').value;if(!n||!t)return;const L=LS.g('rem',[]);L.push({id:Date.now(),n,s:Number(t.slice(0,2))*60+Number(t.slice(3,5)),l:+$('#rl').value,d:$('#rr').value});LS.s('rem',L);render()}
+function dR(id){LS.s('rem',LS.g('rem',[]).filter(r=>String(r.id)!==id));render()}
+function strip(){let h='<div class="wk">';for(let i=-3;i<=3;i++){const k=addD(cur,i),c=R[k]||'';h+=`<div class="${k===cur?'sel':''}" data-k="${k}" onclick="cur=this.dataset.k;render()">${WD[pd(k).getDay()]}<b>${pd(k).getDate()}</b><span class="c${c}">${c||'·'}</span></div>`}return h+'</div>'}
+function mstat(y,m,n){const c={};for(let d=1;d<=n;d++){const k=R[iso(new Date(y,m,d))];if(k)c[k]=(c[k]||0)+1}const w=(c.M||0)+(c.G||0)+(c.E1||0)+(c.E2||0)+(c.N||0),o=(c.W||0)+(c.H||0);return `<div class="cd"><b>এই মাসের হিসাব</b><div class="ch">${Object.keys(c).map(k=>`<span class="c${k}">${k}: ${c[k]}</span>`).join('')}</div><span class="mu">কাজের দিন ${w} · off day ${o} · gym সেশন ${Array.from({length:n},(_,i)=>iso(new Date(y,m,i+1))).filter(k=>R[k]&&isG(k)).length}</span></div>`}
+function fbars(){const F=LS.g('focus',{}),a=[];let mx=60;for(let i=6;i>=0;i--){const k=addD(iso(new Date()),-i),v=F[k]||0;a.push([k,v]);mx=Math.max(mx,v)}return `<div class="cd"><b>গত ৭ দিনের focus</b><div class="bars">${a.map(([k,v])=>`<div><i style="height:${Math.round(v/mx*64)}px"></i>${WD[pd(k).getDay()]}<br>${v}m</div>`).join('')}</div></div>`}
+function wlog(){const L=LS.g('wt',[]),l=L.slice(-5).reverse(),d=L.length>1?(L[L.length-1].w-L[0].w).toFixed(1):0;return `<div class="cd"><b>⚖️ ওজন log</b>${L.length>1?` <span class="mu">(শুরু থেকে ${d>0?'+':''}${d} kg)</span>`:''}<div class="row"><input id="wv" type="number" step="0.1" placeholder="আজকের ওজন kg"><button onclick="addWt()">Save</button></div>${l.map(x=>`<div class="mu">${x.d.slice(5)} · ${x.w} kg</div>`).join('')}</div>`}
+function addWt(){const w=parseFloat($('#wv').value);if(!w)return;const L=LS.g('wt',[]);L.push({d:iso(new Date()),w});LS.s('wt',L);const p=LS.g('prof',{w:65,h:170,a:22,g:0});p.w=w;LS.s('prof',p);render()}
+function bkx(){const o={};try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith('ls_'))o[k]=localStorage.getItem(k)}}catch(e){}const s=JSON.stringify(o);$('#bk').value=s;try{navigator.clipboard.writeText(s);toast('কপি হয়েছে ✓')}catch(e){}}
+function bki(){try{const o=JSON.parse($('#bk').value);Object.keys(o).forEach(k=>{if(k.startsWith('ls_'))localStorage.setItem(k,o[k])});toast('Restore ✓');setTimeout(()=>location.reload(),800)}catch(e){toast('Data ঠিক নেই')}}
+const CAT={work:['💼','#6366f1',['shift','commute']],learn:['📚','#0ea5e9',['study','ostudy','thesis','eng','hs','class','travel']],sleep:['😴','#64748b',['sleep']],body:['🏋️','#ef4444',['gym','care']],other:['🍽️','#22c55e',['meal','plan','rem','salah']]};
+const hm=n=>String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0');
+function dbar(P){const t={};P.forEach(b=>{if(b.t==='free'||b.ov)return;const k=Object.keys(CAT).find(k=>CAT[k][2].includes(b.t))||'other';t[k]=(t[k]||0)+Math.min(b.e,1440)-Math.max(b.s,0)});const s=Object.values(t).reduce((a,b)=>a+b,0)||1;return `<div class="bar" style="display:flex;height:12px">${Object.keys(t).map(k=>`<i style="width:${t[k]/s*100}%;background:${CAT[k][1]}"></i>`).join('')}</div><div class="mu" style="margin-bottom:8px">${Object.keys(t).map(k=>CAT[k][0]+' '+D(t[k])).join(' · ')}</div>`}
+function nextAl(){const n=new Date(),m=n.getHours()*60+n.getMinutes(),d=iso(n),c=[];plan(d).forEach(b=>{if(!b.x&&!['free','shift'].includes(b.t)&&!(b.t==='ostudy'&&!b.f)&&b.s-5>m)c.push([b.s-5,b.l])});LS.g('rem',[]).forEach(r=>{if((r.d==='*'||r.d===d)&&r.s-r.l>m)c.push([r.s-r.l,'⏰ '+r.n])});c.sort((a,b)=>a[0]-b[0]);return c[0]}
+function hlth(){const on=LS.g('alerts',false),np='Notification' in window?Notification.permission:'unsupported',na=nextAl();return `<div class="cd"><b>🩺 Alert health check</b><div class="mu">অ্যালার্ট: ${on?'চালু ✓':'বন্ধ ✗ (উপরে 🔕 চাপো)'}<br>Browser notification: ${np==='granted'?'অনুমতি আছে ✓':np==='denied'?'ব্লক ✗ (browser settings থেকে allow করো)':np==='default'?'অনুমতি চাওয়া হয়নি':'এই browser এ নেই'}${SW?' · Service worker ✓':' · Service worker নেই (Android এ sw.js লাগবে)'}<br>পরের alert: ${na?T(na[0])+' — '+na[1]:'আজ আর নেই'}</div><div class="row"><button onclick="alertUser('🔔 টেস্ট alert')">এখনই Test</button><button class="ol" onclick="toast('১০ সেকেন্ড পর বাজবে — screen lock করো');setTimeout(()=>alertUser('🔔 ১০s টেস্ট'),10000)">১০s পরে Test</button></div></div>`}
+function setg(){return `<div class="cd"><b>⚙️ Duty settings</b><div class="mu">অফিসে পড়ার সময়</div><div class="row"><select id="cw">${[180,210,240].map(v=>`<option value="${v}"${CFG.ow===v?' selected':''}>${v/60} ঘণ্টা</option>`).join('')}</select></div><div class="mu">নামাজের সময় সমন্বয় (মিনিট, + / −)</div><div class="row"><input id="po" type="number" value="${CFG.po||0}"></div><div class="mu">নাইট duty তে ঘুমের সময় (শুরু → শেষ)</div><div class="row"><input id="cs" type="time" value="${hm(CFG.ss)}"><input id="ce" type="time" value="${hm(CFG.se)}"><button onclick="svc()">Save</button></div></div>`}
+function svc(){const f=v=>Number(v.slice(0,2))*60+Number(v.slice(3,5));CFG={po:+$('#po').value||0,ow:+$('#cw').value,ss:f($('#cs').value||'04:00'),se:f($('#ce').value||'06:45')};LS.s('cfg',CFG);render();toast('Save হয়েছে ✓')}
+const rd=Math.PI/180,sn=x=>Math.sin(x*rd),cs=x=>Math.cos(x*rd);
+function pt(d){
+ const x=pd(d),j=Date.UTC(x.getFullYear(),x.getMonth(),x.getDate(),12)/864e5+2440587.5-2451545,
+ g=(357.529+.98560028*j)%360,q=(280.459+.98564736*j)%360,L=(q+1.915*sn(g)+.02*sn(2*g))%360,e=23.439-3.6e-7*j,
+ ra=((Math.atan2(cs(e)*sn(L),cs(L))/rd)/15+24)%24,eq=((q/15-ra+12)%24+24)%24-12,dc=Math.asin(sn(e)*sn(L))/rd,
+ la=23.8103,mid=12+6-90.4125/15-eq,
+ H=a=>Math.acos((sn(a)-sn(dc)*sn(la))/(cs(dc)*cs(la)))/rd/15,
+ ar=Math.atan(1/(1+Math.tan(Math.abs(la-dc)*rd)))/rd,m=h=>Math.round(h*60)+(CFG.po||0);
+ return{f:m(mid-H(-18)),s:m(mid-H(-.833)),d:m(mid+.017),a:m(mid+H(ar)),m:m(mid+H(-.833)),i:m(mid+H(-18))}}
+function prow(){const p=pt(cur);return `<div class="mu" style="margin-bottom:8px">🕌 ফজর ${T(p.f)} · যোহর ${T(p.d)} · আসর ${T(p.a)} · মাগরিব ${T(p.m)} · ইশা ${T(p.i)}</div>`}
+function theme(){const t=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=t;LS.s('theme',t);render()}
+render();setInterval(tick,15000);document.addEventListener('visibilitychange',()=>{if(!document.hidden){tick();render()}});document.addEventListener('click',()=>{try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume()}catch(e){}},{once:true});try{if('serviceWorker' in navigator&&(location.protocol==='http:'||location.protocol==='https:'))navigator.serviceWorker.register('sw.js',{scope:'./'}).then(()=>navigator.serviceWorker.ready).then(r=>{SW=r}).catch(()=>{})}catch(e){}setInterval(tt,1000);setInterval(()=>{if(tab==='t')render()},60000);
+</script></body></html>
